@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quadratic Equation Solver</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .input-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    input[type="text"] {
+      display: inline-block;
+      margin-right: 20px;
+    }
+    .input-group label {
+        width: 20px;
+      font-weight: bold;
+    }
+    .input-group input {
+      width: 50px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .input-group button {
+      padding: 5px 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #4286f4;
+      color: #fff;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      display: none;
+    }
+    .result p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .input-group {
+        flex-direction: column;
+      }
+      .input-group label {
+        width: 100%;
+      }
+      .input-group input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .input-group button {
+        width: 100%;
+      }
+      .result p {
+        font-size: 18px;
+      }
+      @media (max-width: 383px) {
+      .input-group button {
+        width: 100%;
+      }
+      .result p {
+        font-size: 16px;
+      }
+      h1{
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Quadratic Equation Solver</h1>
+    <div class="input-group">
+      <label for="a">a:</label>
+      <input type="text" id="a" placeholder="a">
+      <label for="b">b:</label>
+      <input type="text" id="b" placeholder="b">
+      <label for="c">c:</label>
+      <input type="text" id="c" placeholder="c">
+    </div>
+    <div class="button-group">
+      <button onclick="solve()">Solve</button>
+      <button onclick="reset()">Reset</button>
+    </div>
+    <div class="result">
+      <p>Roots:</p>
+      <p id="root1"></p>
+      <p id="root2"></p>
+    </div>
+  </div>
+  <script>
+function solve() {
+  var a = parseFloat(document.getElementById('a').value);
+  var b = parseFloat(document.getElementById('b').value);
+  var c = parseFloat(document.getElementById('c').value);
+  var discriminant = b*b - 4*a*c;
+
+  if (discriminant >= 0) {
+    var root1 = (-b + Math.sqrt(discriminant)) / (2*a);
+    var root2 = (-b - Math.sqrt(discriminant)) / (2*a);
+    document.getElementById('root1').innerHTML = 'x1 = ' + root1;
+    document.getElementById('root2').innerHTML = 'x2 = ' + root2;
+  } else {
+    var realPart = (-b / (2*a)).toFixed(2);
+    var imaginaryPart = (Math.sqrt(-discriminant) / (2*a)).toFixed(2);
+    document.getElementById('root1').innerHTML = 'x1 = ' + realPart + '+' + imaginaryPart + 'i';
+    document.getElementById('root2').innerHTML = 'x2 = ' + realPart + '-' + imaginaryPart + 'i';
+  }
+
+  document.querySelector('.result').style.display = 'block';
+}
+
+
+function reset() {
+  document.getElementById('a').value = '';
+  document.getElementById('b').value = '';
+  document.getElementById('c').value = '';
+  document.querySelector('.result').style.display = 'none';
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
